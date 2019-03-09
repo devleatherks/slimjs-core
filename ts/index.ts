@@ -1,0 +1,5 @@
+class Slimjs_Core{
+
+    
+
+}

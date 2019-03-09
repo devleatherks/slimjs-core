@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+const Slimjs_core = require('../src/index');
+
+Slimjs_core.debug('SlimJS Core \n');
+
+if(process.argv.length === 2){
+    Slimjs_core.debug('There are no parameters to process.', 'e');
+}
+
+if(process.argv[2] == "system-check"){
+    
+    Slimjs_core.bin_system__checkSystem();
+
+}
