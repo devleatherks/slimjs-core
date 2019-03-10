@@ -8,28 +8,24 @@ let Slim = require('../index');
 let Slim_Server = function()
 {
 
-    let slim_server;
+    let activeServer = null;
 
-    let httpRequsetManager = function(slim_server)
-    {
-        
-        this.slim_server = slim_server;
-    
-    }
-
-    httpRequsetManager.prototype.get = function(path, contollers)
+    this.getModelServer = function(type, port, requestHandler)
     {
 
-        this.slim_server.get(path, (req, res) => {
+        switch (type) {
+            case 'http': 
+                return Slim.modules('http').createServer(requestHandler);
+            break;
+            case 'https': 
+                return Slim.modules('https').createServer(requestHandler);
+            break;
+            case 'http2': 
+                return Slim.modules('http2').createServer(requestHandler);
+            break;
+        }
 
-            // res.send({ok: 1});
-            let handler = Slim.controllers(contollers, req, res);
-
-            handler(req, res);
-    
-        });
-
-        // handler();
+        return false;
 
     }
 
@@ -40,16 +36,35 @@ let Slim_Server = function()
         status: false
     }
 
-    this.start = function(resolve, reject){
+    this.start = function(resolve, reject)
+    {
 
-        slim_server = Slim.modules('express')();
-
-        slim_server.listen(process.env.SERVER_PORT, () => {
-            this.service.status = true; 
-            this.service.description = "NodeJS Server. http://localhost:" + process.env.SERVER_PORT + "/";
-            Slim.debug(this.service.description, 's');
-            resolve(new httpRequsetManager(slim_server));
+        let server = this.getModelServer(process.env.SERVER_PROTOCOL, process.env.SERVER_PORT, (request, response) => {
+            console.log(request.url)
+            response.end('Hello Node.js Server!');
         });
+
+        if (server === false) {
+            return Slim.debug(`The requested server (${process.env.SERVER_PROTOCOL}) does not exist in the system`, 'e');
+        }
+    
+        server.listen(8080, (err) => {
+            if (err) {
+                return console.log('something bad happened', err)
+            }
+            console.log(`server is listening on ${8080}`)
+        })
+
+        // activeServer
+
+        // slim_server = Slim.modules('express')();
+
+        // slim_server.listen(process.env.SERVER_PORT, () => {
+        //     this.service.status = true; 
+        //     this.service.description = "NodeJS Server. http://localhost:" + process.env.SERVER_PORT + "/";
+        //     Slim.debug(this.service.description, 's');
+        //     resolve(new httpRequsetManager(slim_server));
+        // });
       
     }
 

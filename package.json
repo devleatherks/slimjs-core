@@ -1,18 +1,47 @@
 {
+  "_from": "slimjs-core",
+  "_id": "slimjs-core@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-OH7UhSrR1WAv9dYyC+jhH16KRLSkEp3ReoDgw9Nm9TPeQyhtYYrpaSWyXFA7RtOYPlrv+v8kELEDWdfXQUW+lg==",
+  "_location": "/slimjs-core",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "slimjs-core",
     "name": "slimjs-core",
-    "version": "1.0.1",
-    "description": "",
-    "main": "src/index.js",
-    "scripts": {
-        "start": "node ./bin/slimjs",
-        "test" : "mocha ./tests/*.test.js"
-    },
-    "author": "devleatherks <devleatherks@gmail.com>",
-    "license": "MIT",
-    "dependencies": {
-        "debug": "^4.1.1"
-    },
-    "devDependencies": {
-        "mocha": "^6.0.2"
-    }
+    "escapedName": "slimjs-core",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/slimjs-core/-/slimjs-core-1.0.1.tgz",
+  "_shasum": "b7991561e25cd6f306c0f203d9b2dd0bfd68e9fa",
+  "_spec": "slimjs-core",
+  "_where": "E:\\project\\slimjs",
+  "author": {
+    "name": "devleatherks",
+    "email": "devleatherks@gmail.com"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "debug": "^4.1.1"
+  },
+  "deprecated": false,
+  "description": "",
+  "devDependencies": {
+    "mocha": "^6.0.2"
+  },
+  "license": "MIT",
+  "main": "src/index.js",
+  "name": "slimjs-core",
+  "scripts": {
+    "start": "node ./bin/slimjs",
+    "test": "mocha ./tests/*.test.js"
+  },
+  "version": "1.0.1"
 }

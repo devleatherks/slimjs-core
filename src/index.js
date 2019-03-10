@@ -7,6 +7,67 @@ let Core = {
 let controlComponents = ['module'];
 
 class Slimjs_Core{
+    
+    async static build()
+    {
+
+        // let build_routing
+
+    }
+
+    async static build_routing()
+    {
+
+
+
+    }
+
+    async static __autoload(dir, filter)
+    {
+
+        Slimjs_Core.modules("fs").readdirSync(dir + filter).forEach(function(file) {
+
+            Slimjs_Core.modules(dir + file);
+
+        });
+
+    }
+
+     /**
+     * Module connection
+     * 
+     * @example
+     * // return express
+     * Slim_App.controllers('express')
+     * @param {string} module_name - module name
+     * @returns {Object} Returns a previously initialized module.
+     */
+    controllers(controller_name, request, response)
+    {
+
+        let controller_name_slip = controller_name.split('.');
+        let dir_controller = '';
+        let mathod_controller = '';
+
+        controller_name_slip.forEach((element, i) => {
+            
+            if(controller_name_slip.length == (i + 1)){
+                mathod_controller += '/' + element;
+            }else{
+                dir_controller += '/' + element;
+            }
+            
+        });
+
+        if(controller_name in slim_controllers){
+            return slim_controllers[controller_name];
+        }
+
+        slim_controllers[controller_name] = new require(this.get_setting('path').DIR_SRC + 'App/Controllers' + dir_controller)(request, response);
+
+        return slim_controllers[controller_name][mathod_controller];
+
+    }
 
     static system_dir_direction()
     {
